@@ -3,8 +3,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-
+const { init: initCorn } = require('./corn');
+const { init: initDb } = require('./db');
 const app = express();
 
 app.use(logger('dev'));
@@ -12,6 +12,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
+// initialize db
+initDb().then(() => {
+  console.log('connected to db');
+  // initialize corn
+  return initCorn();
+}).catch(error => {
+  console.error(error);
+});
+
+// init routes
+app.use('/', require('./routes'));
+
+
 
 module.exports = app;

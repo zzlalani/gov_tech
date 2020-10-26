@@ -1,0 +1,22 @@
+{
+  "db": {
+    "connection": "",
+    "database": ""
+  },
+  "server": {
+    "port": 80
+  },
+  "decrypt": {
+    "algorithm": "",
+    "key": ""
+  },
+  "corn": {
+    "schedule": "*/30 * * * *"
+  },
+  "endpoints": {
+    "gov_tech": {
+      "facility": "https://www.spaceout.gov.sg/graphql?query={ geojsonPoint }",
+      "crowdLevels": "https://www.spaceout.gov.sg/graphql?query={ facilities { id, band, createdAt, trend } }"
+    }
+  }
+}
